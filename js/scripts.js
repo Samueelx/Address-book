@@ -12,6 +12,17 @@ function Address(street, city, county){
     this.city = city;
     this.county = county;
 }
+Address.prototype.fullAddress = function(){
+    return this.street + ", " + this.city + " " + this.county;
+}
+
+function resetFields(){
+    $('input#new-first-name').val('');
+    $('input#new-last-name').val('');
+    $('input.new-street').val('');
+    $('input.new-city').val('');
+    $('input.new-county').val('');
+}
 
 $(document).ready( function() {
     $('#add-address').click( function() {
@@ -62,11 +73,9 @@ $(document).ready( function() {
 
             $('ul#addresses').text("");
             newContact.addresses.forEach( (address) => {
-                $('ul#addresses').append(`<li>${address.street}, ${address.city} ${address.county}</li>`);
+                $('ul#addresses').append(`<li>${address.fullAddress()}</li>`);
             });
         });
-
-        $('input#new-first-name').val('');
-        $('input#new-last-name').val('');
+        resetFields();
     });
 });
